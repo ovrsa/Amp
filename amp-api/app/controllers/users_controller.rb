@@ -1,7 +1,14 @@
 class UsersController < ApplicationController
     def index
-      @users = User.all
-      render json: @users
+      @users = User.includes(user_categories: [:category, { user_items: :item }]).all
+      render json: @users.as_json(include: {
+        user_categories: {
+          include: {
+            category: { only: [:id, :categoryName] },
+            user_items: { include: { item: { only: [:id, :itemName] } } }
+          }
+        }
+      })
     end
   
     def create
