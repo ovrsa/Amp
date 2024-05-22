@@ -12,9 +12,10 @@ services:
   web:
     build:
       context: ./amp-api
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+    command: bash -c "./wait-for-it.sh db:5432 -- rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
     volumes:
       - ./amp-api:/rails
+      - ./wait-for-it.sh:/wait-for-it.sh
     ports:
       - "3000:3000"
     depends_on:
