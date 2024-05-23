@@ -1,3 +1,4 @@
+import NotFound from '@/views/404.vue';
 import Edit from '@/views/Edit.vue';
 import Home from '@/views/Home.vue';
 import Search from '@/views/Search.vue';
@@ -18,7 +19,12 @@ const routes = [
     path: '/search',
     name: 'Search',
     component: Search,
-  }
+  },
+  { 
+    path: '/:pathMatch(.*)*', 
+    name: 'NotFound', 
+    component: NotFound 
+  },
 ];
 
 const router = createRouter({
