@@ -1,7 +1,7 @@
 import NotFound from '@/views/404.vue';
-import Edit from '@/views/Edit.vue';
+import Discovery from '@/views/Discovery.vue';
 import Home from '@/views/Home.vue';
-import Search from '@/views/Search.vue';
+import Profile from '@/views/Profile.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
@@ -11,14 +11,14 @@ const routes = [
     component: Home,
   },
   {
-    path: '/edit',
-    name: 'Edit',
-    component: Edit,
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
   },
   {
-    path: '/search',
-    name: 'Search',
-    component: Search,
+    path: '/discovery',
+    name: 'Discovery',
+    component: Discovery,
   },
   { 
     path: '/:pathMatch(.*)*', 
