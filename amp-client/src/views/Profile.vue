@@ -1,41 +1,47 @@
 <template>
-<!-- sidebar -->
-<div class="bg-gray-100 min-h-screen">
-  <!-- Header -->
-  <Header />
+  <div class="bg-gray-100 min-h-screen">
+    <Header />
 
-  <!-- postcard -->
-  <div class="flex-1  items-center justify-center mt-10">
-    <!-- user card -->
-    <div class="max-w-sm mx-auto mt-3 bg-white shadow-lg rounded-lg overflow-hidden">
-      <!-- user_name -->
-      <div class="px-6 py-4">
-        <input type="text" class="text-xl font-bold text-gray-900" placeholder="user name">
-      </div>
-
-      <!-- categories -->
-      <div class="px-6 py-4 border-gray-200">
-        <input class="font-bold text-gray-700" placeholder="categories">
-        <ul class="list-disc list-inside mt-2">
-          <input placeholder="item1">
-          <input placeholder="item2">
-        </ul>
-      </div>
-
-      <!-- submmit -->
-      <div class="flex justify-end p-3">
-        <button class="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">変更</button>
+    <!-- user-card -->
+    <div class="text-sm text-gray-600 flex justify-center items-center py-8">
+      <div class="w-full max-w-4xl">
+        <div class="flex flex-col md:flex-row">
+          <!-- user_photo -->
+          <div class="flex justify-center items-center p-4 md:w-1/3">
+            <div class="text-center">
+              <img src="https://via.placeholder.com/130" alt="User Photo" class="mx-auto">
+              <p class="mt-4 text-lg">sample</p>
+            </div>
+          </div>
+          <!-- categories and items -->
+          <div class="md:w-2/3">
+            <div class="mt-1 md:mt-0">
+              <div class="p-3">
+                <!-- <p class="text-gray-700">映画</p> -->
+                <div class="mt-1">
+                  <router-link to="/discovery">
+                    映画
+                  </router-link>
+                </div>
+                <div class="mt-2">
+                  <router-link to="/discovery" class="px-2 pt-1">
+                    ハリーポッター
+                  </router-link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <!-- edit button -->
+    <div class="flex justify-end">  
+      <router-link to="/profile/edit" class="text-sm">
+        Edit
+      </router-link>
+    </div>
   </div>
-
-  <!-- status-bar -->
-  <div class="flex items-center justify-center h-16">
-    <p>user icon</p>
-  </div>
-
-</div>
-
+  
 </template>
 
 <script setup lang="ts">
