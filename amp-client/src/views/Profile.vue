@@ -10,7 +10,7 @@
           <div class="flex justify-center items-center p-4 md:w-1/3">
             <div class="text-center">
               <img src="https://via.placeholder.com/130" alt="User Photo" class="mx-auto">
-              <p class="mt-4 text-lg">sample</p>
+              <p class="mt-4 text-sm">sample</p>
             </div>
           </div>
           <!-- categories and items -->

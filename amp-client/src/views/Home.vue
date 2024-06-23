@@ -2,10 +2,6 @@
   <div class="bg-gray-100 min-h-screen">
     <Header />
 
-    <div class="text-base text-gray-600 text-center py-9">
-      Hello, this is Amp.
-      <div>A place to share your interests.</div>
-    </div>
     <!-- user-card -->
     <div class="text-sm text-gray-600 grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 md:px-16 lg:px-32">
       <div v-for="user in users" :key="user.id" class="pt-2 flex border-t border-gray-300 min-h-[250px]">

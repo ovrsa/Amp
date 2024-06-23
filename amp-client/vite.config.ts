@@ -1,9 +1,9 @@
+import { defineConfig } from 'vite';
+import { fileURLToPath } from 'url';
 import vue from '@vitejs/plugin-vue';
 import autoprefixer from 'autoprefixer';
 import * as path from 'path';
 import tailwind from 'tailwindcss';
-import { fileURLToPath } from 'url';
-import { defineConfig } from 'vite';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
