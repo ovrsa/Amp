@@ -28,8 +28,13 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "src/types/**/*.d.ts",  // 追加
+    "src/types/**/*.d.ts", 
     "vite.config.ts"
   ],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "aliases": {
+    "utils": "@/lib/utils",
+    "components": "@/components",
+    "ui": "@/app/ui"
+  }
 }
