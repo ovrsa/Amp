@@ -66,7 +66,7 @@ describe('useFetchUsers Hook', () => {
     });
 
     const wrapper = mount(TestComponent);
-    await flushPromises(); // 確実にすべての非同期更新を待つ
+    await flushPromises(); 
 
     expect(wrapper.vm.users).toEqual(mockData);
   });
