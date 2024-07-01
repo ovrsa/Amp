@@ -32,7 +32,7 @@
     "@types/node": "^20.12.12",
     "@types/vue-router": "^2.0.0",
     "@vitejs/plugin-vue": "^5.0.4",
-    "typescript": "^5.2.2",
+    "typescript": "^5.5.2",
     "vite": "^5.2.0",
     "vue-tsc": "^2.0.6"
   }
