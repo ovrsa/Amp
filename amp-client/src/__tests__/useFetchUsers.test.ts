@@ -1,16 +1,20 @@
+/// <reference types="vitest" />
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { mount, flushPromises } from '@vue/test-utils';
 import axios from 'axios';
 import { defineComponent } from 'vue';
 import { useFetchUsers } from '../hooks/useFetchUsers';
 
-vi.mock('axios');
+vi.mock('axios'); // axiosをモック化
 
-describe('useFetchUsers Hook', () => {
+describe('useFetchUsers', () => {
+  // テスト実行前にモックのリセット
   beforeEach(() => {
     vi.resetAllMocks();
+    vi.spyOn(window, 'alert').mockImplementation(() => {});
   });
 
+  // fetchUsersメソッドが正常に動作することを確認
   it('fetches and sets users correctly', async () => {
     const mockData = [
       {
@@ -37,30 +41,45 @@ describe('useFetchUsers Hook', () => {
           },
         ],
       },
-      {
-        id: 2,
-        username: 'user2',
-        email: 'user2@example.com',
-        userIcon: 'url_to_icon2',
-        categories: [
-          {
-            id: 3,
-            name: 'Category3',
-            items: [
-              { id: 5, name: 'Item5' },
-              { id: 6, name: 'Item6' },
-            ],
-          },
-        ],
-      },
     ];
 
+    // Axiosのgetメソッドをモック化
     (axios.get as vi.Mock).mockResolvedValue({ data: mockData });
+
+    // テストコンポーネントの作成
+    const TestComponent = defineComponent({
+      template: '<div></div>',
+      setup() {
+        const { users, fetchUsers } = useFetchUsers();
+        fetchUsers(); // fetchUsersを手動で呼び出す
+        return { users };
+      },
+    });
+
+    // テストコンポーネントのマウント
+    const wrapper = mount(TestComponent);
+    await flushPromises(); 
+
+    // データの検証
+    expect(wrapper.vm.users).toEqual(mockData);
+  });
+
+  // 認証エラーのテストケース
+  it('handles authentication error', async () => {
+    const errorMessage = 'データ取得時の認証に失敗しました。';
+
+    (axios.get as vi.Mock).mockRejectedValue({
+      response: {
+        status: 401,
+        data: { error: 'Unauthorized', message: errorMessage },
+      },
+    });
 
     const TestComponent = defineComponent({
       template: '<div></div>',
       setup() {
-        const { users } = useFetchUsers();
+        const { users, fetchUsers } = useFetchUsers();
+        fetchUsers(); // fetchUsersを手動で呼び出す
         return { users };
       },
     });
@@ -68,6 +87,36 @@ describe('useFetchUsers Hook', () => {
     const wrapper = mount(TestComponent);
     await flushPromises(); 
 
-    expect(wrapper.vm.users).toEqual(mockData);
+    // アラートが呼び出されたことを確認
+    expect(window.alert).toHaveBeenCalledWith('認証に失敗しました。');
+    expect(wrapper.vm.users).toEqual([]);
+  });
+
+  // サーバーエラーのテストケース
+  it('handles server error', async () => {
+    const errorMessage = 'サーバーエラーが発生しました。';
+
+    (axios.get as vi.Mock).mockRejectedValue({
+      response: {
+        status: 500,
+        data: { error: 'Internal server error', message: errorMessage },
+      },
+    });
+
+    const TestComponent = defineComponent({
+      template: '<div></div>',
+      setup() {
+        const { users, fetchUsers } = useFetchUsers();
+        fetchUsers(); // fetchUsersを手動で呼び出す
+        return { users };
+      },
+    });
+
+    const wrapper = mount(TestComponent);
+    await flushPromises(); 
+
+    // エラーメッセージが設定されていることを確認
+    expect(window.alert).toHaveBeenCalledWith('サーバーエラーが発生しました。');
+    expect(wrapper.vm.users).toEqual([]);
   });
 });
