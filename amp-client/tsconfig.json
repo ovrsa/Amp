@@ -15,7 +15,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "types": ["vite/client", "vitest"],
+    "types": [
+      "vite/client",
+      "vitest",
+      "./types/rollup-plugin-node-resolve"
+    ],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],

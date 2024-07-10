@@ -15,9 +15,9 @@ export function useFetchUsers() {
       if (err.response) {
         if (err.response.status === 401) {
           window.alert('認証に失敗しました。');
-        } else {
+        } else if (err.response.status === 500) {
           window.alert('サーバーエラーが発生しました。');
-        }
+      }
       } else {
         window.alert('ネットワークエラーが発生しました。');
       }
